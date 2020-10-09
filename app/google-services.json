@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "232902675023",
+    "firebase_url": "https://renengmon-9ed8f.firebaseio.com",
+    "project_id": "renengmon-9ed8f",
+    "storage_bucket": "renengmon-9ed8f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:232902675023:android:78f9660e03ebf07a32383a",
+        "android_client_info": {
+          "package_name": "com.ps3.rem"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "232902675023-q9avorv6s0qtdaue13pi89tqaml2mo54.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaO8YEWV13W4LPfF5mwILijSUfIjj2E9Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "232902675023-q9avorv6s0qtdaue13pi89tqaml2mo54.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
