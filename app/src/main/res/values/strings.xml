@@ -3,4 +3,6 @@
     <string name="hello">Hello!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loginstatus">LoginStatus</string>
+    <string name="openstatus">OpenStatus</string>
 </resources>

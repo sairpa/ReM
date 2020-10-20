@@ -1,5 +1,6 @@
 package com.ps3.rem
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -9,7 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 
 class IntroPage : AppCompatActivity() {
 
-    var gs: Button?= null
+    var gs: Button? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -17,11 +18,22 @@ class IntroPage : AppCompatActivity() {
 
         gs = findViewById(R.id.btngs)
 
-        }
+    }
 
-    public fun getsetgo(view: View){
+    public fun getsetgo(view: View) {
 
         view.setOnClickListener {
+
+            val status: Boolean? = getSharedPreferences(getString(R.string.loginstatus),Context.MODE_PRIVATE).getBoolean(getString(R.string.openstatus),false)
+
+            if (!status!!) {
+
+                val sp = getSharedPreferences(getString(R.string.loginstatus), Context.MODE_PRIVATE)
+                sp.edit().putBoolean(getString(R.string.openstatus), true).apply()
+                val int = Intent(applicationContext, SignUI::class.java)
+                startActivity(int)
+
+            }
             val int = Intent(applicationContext, SignUI::class.java)
             startActivity(int)
         }

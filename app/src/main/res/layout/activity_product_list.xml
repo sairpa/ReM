@@ -53,7 +53,7 @@
                 android:textColor="#FFEB3B" />
 
             <Button
-                android:id="@+id/btndet1"
+                android:id="@+id/btndet1s"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 android:textColor="#D52424" />
 
             <Button
-                android:id="@+id/btndet2"
+                android:id="@+id/btndet2g"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -164,7 +164,7 @@
                 android:textColor="#009688" />
 
             <Button
-                android:id="@+id/btndet3"
+                android:id="@+id/btndet3w"
                 style="@style/Widget.AppCompat.Button.Borderless"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
