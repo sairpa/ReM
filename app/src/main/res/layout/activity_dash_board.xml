@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.cardview.widget.CardView
-                android:id="@+id/cardView5"
+                android:id="@+id/cvGraph"
                 android:layout_width="match_parent"
                 android:layout_height="350dp"
                 android:layout_marginLeft="3dp"
@@ -67,6 +67,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     app:srcCompat="@drawable/graph" />
+
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
@@ -79,7 +80,7 @@
                 android:background="#80FFFFFF"
                 app:cardBackgroundColor="#80FFFFFF"
                 app:cardCornerRadius="8dp"
-                app:layout_constraintBottom_toTopOf="@+id/cardView5"
+                app:layout_constraintBottom_toTopOf="@+id/cvGraph"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView16">
@@ -127,7 +128,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cardView5">
+                app:layout_constraintTop_toBottomOf="@+id/cvGraph">
 
                 <LinearLayout
                     android:layout_width="match_parent"
