@@ -23,13 +23,21 @@ class SignUI : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_u_i)
 
-        btnsu = findViewById(R.id.btnsub)
+        btnsubmit = findViewById(R.id.btnsub)
         btnsu = findViewById(R.id.btnsu)
         etemail = findViewById(R.id.etemail)
         etpsswd = findViewById(R.id.etpasswd)
 
         mAuth = FirebaseAuth.getInstance()
         mAuthList = FirebaseAuth.AuthStateListener {  }
+
+        btnsu!!.setOnClickListener {
+            signUp(it)
+        }
+
+        btnsubmit!!.setOnClickListener {
+            signIn(it)
+        }
 
     }
 
@@ -45,7 +53,7 @@ class SignUI : AppCompatActivity() {
 
         }
     }
-            fun signIn(view: View) {
+        fun signIn(view: View) {
                 if(btnsu!!.visibility == View.GONE){
 
                     signUp(view)
