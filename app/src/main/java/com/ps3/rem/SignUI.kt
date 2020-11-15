@@ -1,14 +1,21 @@
 package com.ps3.rem
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.StorageReference
+import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_sign_u_i.*
+
 
 class SignUI : AppCompatActivity() {
     var btnsu: Button?= null
@@ -17,6 +24,8 @@ class SignUI : AppCompatActivity() {
     var etpsswd:EditText?=null
     var mAuth: FirebaseAuth? = null
     var mAuthList: FirebaseAuth.AuthStateListener? = null
+    var storage:FirebaseStorage? = null
+    private lateinit var storageRef : StorageReference
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,6 +39,9 @@ class SignUI : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
         mAuthList = FirebaseAuth.AuthStateListener {  }
+
+         storage = Firebase.storage
+        storageRef = storage!!.reference
 
         btnsu!!.setOnClickListener {
             signUp(it)
@@ -49,6 +61,12 @@ class SignUI : AppCompatActivity() {
             etaddrs.visibility = View.VISIBLE
             etpincd.visibility = View.VISIBLE
             btnsu!!.visibility = View.GONE
+            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
+            val myRef: DatabaseReference = database.getReference("Users")
+            val myRef1: DatabaseReference = database.getReference("UserIDs")
+            val id = myRef1.setValue(etusrid.text.toString())
+            val id1 = myRef1.setValue(etusrid.text.toString())
+            myRef1.push()
 
 
         }
@@ -64,9 +82,17 @@ class SignUI : AppCompatActivity() {
                             etpsswd!!.text.toString()
                         ).addOnCompleteListener { task ->
                             if (task.isSuccessful) {
-                                Toast.makeText(applicationContext, "User Created:)", Toast.LENGTH_LONG)
+                                Toast.makeText(
+                                    applicationContext,
+                                    "User Created:)",
+                                    Toast.LENGTH_LONG
+                                )
                                     .show()
-                                Toast.makeText(applicationContext, "Signed In 😁", Toast.LENGTH_SHORT)
+                                Toast.makeText(
+                                    applicationContext,
+                                    "Signed In 😁",
+                                    Toast.LENGTH_SHORT
+                                )
                                     .show()
                                 val intent = Intent(applicationContext, DashBoard::class.java)
                                 startActivity(intent)
