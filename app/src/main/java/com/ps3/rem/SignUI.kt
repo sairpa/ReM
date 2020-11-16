@@ -2,14 +2,15 @@ package com.ps3.rem
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.DatabaseReference
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
+import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.StorageReference
@@ -18,15 +19,15 @@ import kotlinx.android.synthetic.main.activity_sign_u_i.*
 
 
 class SignUI : AppCompatActivity() {
+
     var btnsu: Button?= null
     var btnsubmit: Button?= null
     var etemail:EditText?=null
     var etpsswd:EditText?=null
     var mAuth: FirebaseAuth? = null
     var mAuthList: FirebaseAuth.AuthStateListener? = null
-    var storage:FirebaseStorage? = null
-    private lateinit var storageRef : StorageReference
-
+    lateinit var database: DatabaseReference
+    lateinit var id :String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,11 +38,21 @@ class SignUI : AppCompatActivity() {
         etemail = findViewById(R.id.etemail)
         etpsswd = findViewById(R.id.etpasswd)
 
+        etemail!!.text.clear()
+        etpasswd!!.text.clear()
+        etpsswdcfm.text.clear()
+        etaddrs.text.clear()
+        etpincd.text.clear()
+        etusrid.text.clear()
+        id = etusrid.text.toString()
+
+         database = Firebase.database.reference
+
+
         mAuth = FirebaseAuth.getInstance()
         mAuthList = FirebaseAuth.AuthStateListener {  }
 
-         storage = Firebase.storage
-        storageRef = storage!!.reference
+
 
         btnsu!!.setOnClickListener {
             signUp(it)
@@ -50,24 +61,19 @@ class SignUI : AppCompatActivity() {
         btnsubmit!!.setOnClickListener {
             signIn(it)
         }
-
     }
+
+
+
 
     fun signUp(view: View) {
         view.setOnClickListener {
-            tvtitle.setText("Sign Up :)")
+            tvtitle.setText("Sign Up")
             etusrid.visibility = View.VISIBLE
             etpsswdcfm.visibility = View.VISIBLE
             etaddrs.visibility = View.VISIBLE
             etpincd.visibility = View.VISIBLE
             btnsu!!.visibility = View.GONE
-            val database: FirebaseDatabase = FirebaseDatabase.getInstance()
-            val myRef: DatabaseReference = database.getReference("Users")
-            val myRef1: DatabaseReference = database.getReference("UserIDs")
-            val id = myRef1.setValue(etusrid.text.toString())
-            val id1 = myRef1.setValue(etusrid.text.toString())
-            myRef1.push()
-
 
         }
     }
@@ -77,6 +83,7 @@ class SignUI : AppCompatActivity() {
                     signUp(view)
                     if (!etemail!!.text.isEmpty() && !etpsswd!!.text.isEmpty() && !etusrid.text.isEmpty() &&
                         !(etpsswdcfm.text.equals(etpsswd!!.text)) && !etaddrs.text.isEmpty() && !etpincd.text.isEmpty()) {
+
                         mAuth!!.createUserWithEmailAndPassword(
                             etemail!!.text.toString(),
                             etpsswd!!.text.toString()
@@ -94,19 +101,18 @@ class SignUI : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
+                                val usrid = database.child("userIDs").child(id)
+                                usrid.setValue(id)
                                 val intent = Intent(applicationContext, DashBoard::class.java)
                                 startActivity(intent)
                             }
                         }.addOnFailureListener { exception ->
-                            if (exception != null) {
-                                Toast.makeText(
-                                    applicationContext,
-                                    exception.localizedMessage!!.toString(),
-                                    Toast.LENGTH_LONG
-                                ).show()
-                            }
+                            Toast.makeText(
+                                applicationContext,
+                                exception.localizedMessage!!.toString(),
+                                Toast.LENGTH_LONG
+                            ).show()
                         }
-
 
                     }
                     else{
@@ -139,13 +145,11 @@ class SignUI : AppCompatActivity() {
                                 }
 
                             }.addOnFailureListener { exception ->
-                                if (exception != null) {
-                                    Toast.makeText(
-                                        applicationContext,
-                                        exception.localizedMessage,
-                                        Toast.LENGTH_LONG
-                                    ).show()
-                                }
+                                Toast.makeText(
+                                    applicationContext,
+                                    exception.localizedMessage,
+                                    Toast.LENGTH_LONG
+                                ).show()
                             }
 
                         } else {
