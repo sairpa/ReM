@@ -113,7 +113,7 @@
         android:id="@+id/button5"
         style="@style/Widget.AppCompat.Button.Borderless"
         android:layout_width="60dp"
-        android:layout_height="60dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="28dp"
         android:background="@drawable/cube1"
         android:onClick="buy"
@@ -123,7 +123,8 @@
         android:textColorHint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etpid" />
 
     <TextView
         android:id="@+id/tvchg2"
@@ -147,5 +148,19 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="@+id/tvchg2"
         app:layout_constraintTop_toBottomOf="@+id/tvchg2" />
+
+    <EditText
+        android:id="@+id/etpid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="561dp"
+        android:layout_marginBottom="23dp"
+        android:ems="10"
+        android:hint="Enter the Product ID"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/button5"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

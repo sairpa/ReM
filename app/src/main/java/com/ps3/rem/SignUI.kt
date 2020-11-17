@@ -1,5 +1,4 @@
 package com.ps3.rem
-
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -12,11 +11,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
-import com.google.firebase.storage.StorageReference
-import com.google.firebase.storage.ktx.storage
+import com.ps3.rem.Classes.User_C
 import kotlinx.android.synthetic.main.activity_sign_u_i.*
-
 
 class SignUI : AppCompatActivity() {
 
@@ -26,8 +22,8 @@ class SignUI : AppCompatActivity() {
     var etpsswd:EditText?=null
     var mAuth: FirebaseAuth? = null
     var mAuthList: FirebaseAuth.AuthStateListener? = null
+    lateinit var idUsr:String
     lateinit var database: DatabaseReference
-    lateinit var id :String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,20 +31,20 @@ class SignUI : AppCompatActivity() {
 
         btnsubmit = findViewById(R.id.btnsub)
         btnsu = findViewById(R.id.btnsu)
-        etemail = findViewById(R.id.etemail)
+        etemail = findViewById(R.id.etemailt)
         etpsswd = findViewById(R.id.etpasswd)
 
+        etname.text.clear()
+        etphone.text.clear()
         etemail!!.text.clear()
         etpasswd!!.text.clear()
         etpsswdcfm.text.clear()
         etaddrs.text.clear()
         etpincd.text.clear()
         etusrid.text.clear()
-        id = etusrid.text.toString()
+
 
          database = Firebase.database.reference
-
-
         mAuth = FirebaseAuth.getInstance()
         mAuthList = FirebaseAuth.AuthStateListener {  }
 
@@ -73,6 +69,8 @@ class SignUI : AppCompatActivity() {
             etpsswdcfm.visibility = View.VISIBLE
             etaddrs.visibility = View.VISIBLE
             etpincd.visibility = View.VISIBLE
+            etphone.visibility = View.VISIBLE
+            etname.visibility = View.VISIBLE
             btnsu!!.visibility = View.GONE
 
         }
@@ -82,7 +80,7 @@ class SignUI : AppCompatActivity() {
 
                     signUp(view)
                     if (!etemail!!.text.isEmpty() && !etpsswd!!.text.isEmpty() && !etusrid.text.isEmpty() &&
-                        !(etpsswdcfm.text.equals(etpsswd!!.text)) && !etaddrs.text.isEmpty() && !etpincd.text.isEmpty()) {
+                        !(etpsswdcfm.text.equals(etpsswd!!.text)) && !etaddrs.text.isEmpty() && !etpincd.text.isEmpty() && etphone.text.isNotBlank() && etname.text.isNotBlank()) {
 
                         mAuth!!.createUserWithEmailAndPassword(
                             etemail!!.text.toString(),
@@ -101,9 +99,18 @@ class SignUI : AppCompatActivity() {
                                     Toast.LENGTH_SHORT
                                 )
                                     .show()
-                                val usrid = database.child("userIDs").child(id)
-                                usrid.setValue(id)
+                                Log.v("Status",etusrid.text.toString())
+                                val usrid = database.child("UserIDs").child(etusrid.text.toString())
+                                usrid.setValue(etusrid.text.toString())
+
+                                idUsr = etusrid.text.toString()
+
+                                val usrinfo = database.child("User").child(etusrid.text.toString())
+                                val k = User_C(etname.text.toString(),etphone.text.toString(), etaddrs.text.toString(), etpincd.text.toString(), etemailt.text.toString())
+                                usrinfo.setValue(k)
+
                                 val intent = Intent(applicationContext, DashBoard::class.java)
+                                intent.putExtra("ID", idUsr)
                                 startActivity(intent)
                             }
                         }.addOnFailureListener { exception ->
@@ -164,4 +171,7 @@ class SignUI : AppCompatActivity() {
                     }
                 }
             }
+
+
+
         }

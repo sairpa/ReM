@@ -6,9 +6,13 @@ import android.os.Bundle
 import android.view.View
 
 class ProductList : AppCompatActivity() {
+    var id:String? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_product_list)
+
+        id = intent.getStringExtra("ID")
+
     }
 
     fun redirect(view: View)
@@ -24,6 +28,7 @@ class ProductList : AppCompatActivity() {
             if(view.id == R.id.btndet3w){
                 intent.putExtra("Type", "Wind")
             }
+            intent.putExtra("ID",id)
             startActivity(intent)
         }
     }

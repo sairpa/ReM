@@ -13,6 +13,7 @@ class DashBoard : AppCompatActivity() {
 
     var mAuth: FirebaseAuth? = null
     var mAuthList: FirebaseAuth.AuthStateListener? = null
+    var id:String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -20,6 +21,8 @@ class DashBoard : AppCompatActivity() {
 
         mAuth = FirebaseAuth.getInstance()
         mAuthList = FirebaseAuth.AuthStateListener {  }
+
+        id = intent.getStringExtra("ID")
 
     }
 
@@ -34,6 +37,7 @@ class DashBoard : AppCompatActivity() {
         if(item.itemId == R.id.buy)
         {
             intent  = Intent(applicationContext,ProductList::class.java)
+            intent.putExtra("ID", id)
             startActivity(intent)
         }
 
