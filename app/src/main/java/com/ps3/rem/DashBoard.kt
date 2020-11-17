@@ -40,7 +40,15 @@ class DashBoard : AppCompatActivity() {
         getDataforpown()
         getDataforStats()
         getDataforGraph()
+        Toastmaker()
+        tvd13.setOnClickListener {
+         Toast.makeText(applicationContext,"Feature in Works!",Toast.LENGTH_SHORT).show()
+            if (tvd13.text.toString() == "On" || tvd13.text.toString() == "on" ){
+
+            }
+        }
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         val menuInflater = menuInflater
@@ -254,6 +262,31 @@ class DashBoard : AppCompatActivity() {
             })
     }
 
+    fun Toastmaker()
+    {
+
+        val prod = database.child("User").child(id.toString()).child("Products")
+        prod.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+                for (snap in snapshot.children) {
+                        for (sna in snap.children) {
+                            val msg = sna.child("status").getValue().toString()
+                            if(msg == "Error")
+                            {
+                                Toast.makeText(applicationContext," Your Machines seems to be malfunctioned!",Toast.LENGTH_SHORT).show()
+                            }
+                            break
+                    }
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+
+            }
+        })
+
+    }
+
     fun getId()
     {
 
@@ -299,6 +332,7 @@ class DashBoard : AppCompatActivity() {
             getDataforpown()
             getDataforStats()
             getDataforGraph()
+            Toastmaker()
         }
 
         if(item.itemId == R.id.about){

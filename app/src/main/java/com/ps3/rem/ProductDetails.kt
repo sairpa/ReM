@@ -73,13 +73,13 @@ class ProductDetails : AppCompatActivity() {
 
                     }
                     if(typep.equals("GeoT") ){
-                        Log.e("Iding","Why dude!?")
+
                         usrinfo.child("Geo Thermal").child(pid).setValue(Geo_C(pid, "off", "0", "0", "mushy", "250MV", "50MV", "50%", "80॰ C"))
 
                     }
 
                     if(typep.equals("Wind") ){
-                        Log.e("Iding","Why dude!? Wind")
+
                         usrinfo.child("Wind Plant").child(pid).setValue(Wind_C(pid, "off", "0", "0", "800MV", "2MV","10kmph","30%","80॰ C"))
 
                     }
