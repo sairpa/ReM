@@ -11,7 +11,17 @@ public class Geo_C {
     String energyc;
     String moisture;
 
-    public Geo_C(String pid, String status, String uptime, String effciency, String soiltype, String energyg, String energyc, String moisture) {
+    public String getTemperature() {
+        return temperature;
+    }
+
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+    }
+
+    String temperature;
+
+    public Geo_C(String pid, String status, String uptime, String effciency, String soiltype, String energyg, String energyc, String moisture, String temperature) {
         this.pid = pid;
         this.status = status;
         this.uptime = uptime;
@@ -20,6 +30,7 @@ public class Geo_C {
         this.energyg = energyg;
         this.energyc = energyc;
         this.moisture = moisture;
+        this.temperature = temperature;
     }
 
     public String getPid() {

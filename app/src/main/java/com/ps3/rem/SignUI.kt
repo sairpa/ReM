@@ -101,7 +101,7 @@ class SignUI : AppCompatActivity() {
                                     .show()
                                 Log.v("Status",etusrid.text.toString())
                                 val usrid = database.child("UserIDs").child(etusrid.text.toString())
-                                usrid.setValue(etusrid.text.toString())
+                                usrid.setValue(mAuth!!.currentUser!!.email.toString())
 
                                 idUsr = etusrid.text.toString()
 
@@ -110,7 +110,7 @@ class SignUI : AppCompatActivity() {
                                 usrinfo.setValue(k)
 
                                 val intent = Intent(applicationContext, DashBoard::class.java)
-                                intent.putExtra("ID", idUsr)
+
                                 startActivity(intent)
                             }
                         }.addOnFailureListener { exception ->

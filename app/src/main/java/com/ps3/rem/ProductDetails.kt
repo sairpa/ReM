@@ -51,8 +51,7 @@ class ProductDetails : AppCompatActivity() {
 
     }
     fun buy(view: View)
-    {
-        Toast.makeText(applicationContext, "Oye!", Toast.LENGTH_SHORT).show()
+    {3
         view.setOnClickListener {
             val builder = AlertDialog.Builder(this)
             //set title for alert dialog
@@ -67,21 +66,21 @@ class ProductDetails : AppCompatActivity() {
                 if(etpid.text.isNotEmpty()){
                     val pid = etpid.text.toString()
                     Toast.makeText(applicationContext, "Added to Subscription", Toast.LENGTH_SHORT).show()
-                    val usrinfo = database.child("User").child(id!!.toString()).child("Products")
+                    val usrinfo = database.child("User").child(this.id.toString()).child("Products")
                     if(typep.equals("Solar")){
 
-                        usrinfo.child("Solar").child(pid).setValue(Solar_C(pid,"Off","0","0%","50%","300MV","3MV","12","0","clear","100"))
+                        usrinfo.child("Solar").child(pid).setValue(Solar_C(pid,"Off","0","0%","50%","300MV","3MV","12","0","clear","100","100॰ C"))
 
                     }
                     if(typep.equals("GeoT") ){
                         Log.e("Iding","Why dude!?")
-                        usrinfo.child("Geo Thermal").child(pid).setValue(Geo_C(pid, "off", "0", "0", "mushy", "250MV", "50MV", "50%"))
+                        usrinfo.child("Geo Thermal").child(pid).setValue(Geo_C(pid, "off", "0", "0", "mushy", "250MV", "50MV", "50%", "80॰ C"))
 
                     }
 
                     if(typep.equals("Wind") ){
                         Log.e("Iding","Why dude!? Wind")
-                        usrinfo.child("Wind Plant").child(pid).setValue(Wind_C(pid, "off", "0", "0", "800MV", "2MV", "4","10kmph","30%","40m"))
+                        usrinfo.child("Wind Plant").child(pid).setValue(Wind_C(pid, "off", "0", "0", "800MV", "2MV","10kmph","30%","80॰ C"))
 
                     }
 

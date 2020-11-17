@@ -13,12 +13,22 @@ public class Solar_C {
     String cloudcover;
     String soiling;
     String sunint;
+    public String getTemperature() {
+        return temperature;
+    }
 
-    public Solar_C(String pid, String status, String uptime, String effciency, String hbu, String energyg, String getEnergyc, String nop, String cloudcover, String soiling, String sunint) {
+    public void setTemperature(String temperature) {
+        this.temperature = temperature;
+    }
+
+    String temperature;
+
+    public Solar_C(String pid, String status, String uptime, String effciency, String hbu, String energyg, String getEnergyc, String nop, String cloudcover, String soiling, String sunint, String temperature) {
         this.pid = pid;
         this.status = status;
         this.uptime = uptime;
         this.effciency = effciency;
+        this.temperature = temperature;
         this.hbu = hbu;
         this.energyg = energyg;
         this.energyc = getEnergyc;
